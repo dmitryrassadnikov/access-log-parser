@@ -35,18 +35,10 @@ public class Main {
                 List<String> lines = new ArrayList<>();
                 while ((line = reader.readLine()) != null) {
                     totalLines++;
-                    if (line.length() > maxLength) {
-                        maxLength = line.length();
-                    }
-                    if (line.length() < minLength) {
-                        minLength = line.length();
-                    }
                     lines.add(line);
                 }
                 reader.close();
                 System.out.printf("Общее количество строк в файле: %d\n", totalLines);
-                System.out.printf("Длина самой длинной строки в файле: %d\n", maxLength);
-                System.out.printf("Длина самой короткой строки в файле: %d\n", minLength);
                 for (String s : lines) {
                     if (s.length() > 1024) {
                         throw new CustException("Строка слишком длинная!");
