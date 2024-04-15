@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
 
 public class UserAgentAnalyzer {
     private static final Pattern USER_AGENT_PATTERN = Pattern.compile(".*?(\\(.*?\\))");
+
     public static void main(String[] args) throws IOException {
         try {
             File file = new File("c:\\PATH\\access.log");
-
             FileReader fileReader = new FileReader(file);
             BufferedReader reader = new BufferedReader(fileReader);
             String line;
@@ -24,7 +24,6 @@ public class UserAgentAnalyzer {
             }
             reader.close();
             System.out.printf("Общее количество строк в файле: %d\n", totalLines);
-
             List<String> userAgents = readUserAgentsFromFile(file);
             int googlebotCount = 0;
             int yandexbotCount = 0;
