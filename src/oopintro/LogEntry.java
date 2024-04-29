@@ -1,29 +1,39 @@
 package oopintro;
 
 import java.time.LocalDateTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static oopintro.DateFormat.formatDate;
 
 public class LogEntry {
 
-    private final String ipAddress;
-    private final LocalDateTime dateTime;
-    private final HttpMethod method;
-    private final String requestPath;
-    private final int responseCode;
-    private final long dataSize;
-    private final String referer;
-    private final String userAgent;
+    private String ipAddress;
+    private LocalDateTime dateTime;
+    private String method;
+    private String path;
+    private int responseCode;
+    private long contentLength;
+    private String referer;
+    private String userAgent;
 
-    public LogEntry(String logLine) {
-        String[] parts = logLine.split(" ");
-        this.ipAddress = parts[0];
-        this.dateTime = LocalDateTime.parse(parts[1]);
-        this.method = HttpMethod.valueOf(parts[2].toUpperCase());
-        this.requestPath = parts[3];
-        this.responseCode = Integer.parseInt(parts[4]);
-        this.dataSize = Long.parseLong(parts[5]);
-        this.referer = parts[6];
-        this.userAgent = parts[7];
+
+    public LogEntry(String file) {
+        Pattern pattern = Pattern.compile("(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}) - - (\\[[^\\]]+\\]) \"(GET|POST|HEAD) (.+?)\" (\\d{3}) (\\d+) \"(.+)\" \"(.+)\"");
+        Matcher matcher = pattern.matcher(file);
+        if (matcher.find()) {
+            this.ipAddress = matcher.group(1);
+            this.dateTime = LocalDateTime.parse(formatDate(matcher.group(2)));
+            this.method = String.valueOf(HttpMethod.valueOf("GET"));
+            this.path = matcher.group(4);
+            this.responseCode = Integer.parseInt(matcher.group(5));
+            this.contentLength = Long.parseLong(matcher.group(6));
+            this.referer = matcher.group(7);
+            this.userAgent = matcher.group(8);
+        }
     }
+
+
 
     public String getIpAddress() {
         return ipAddress;
@@ -33,20 +43,20 @@ public class LogEntry {
         return dateTime;
     }
 
-    public HttpMethod getMethod() {
+    public String getMethod() {
         return method;
     }
 
-    public String getRequestPath() {
-        return requestPath;
+    public String getPath() {
+        return path;
     }
 
     public int getResponseCode() {
         return responseCode;
     }
 
-    public long getDataSize() {
-        return dataSize;
+    public long getContentLength() {
+        return contentLength;
     }
 
     public String getReferer() {
@@ -57,8 +67,17 @@ public class LogEntry {
         return userAgent;
     }
 
-    public enum HttpMethod {
-        GET, POST, PUT, DELETE, PATCH, TRACE, LINK, UNLINK
+    @Override
+    public String toString() {
+        return String.format("LogEntry{IP-адрес='%s', Дата и время=%s, Метод='%s', Путь='%s', Код ответа=%d, Длина содержимого=%d, Реферер='%s', User-Agent='%s'}",
+                ipAddress, dateTime, method, path, responseCode, contentLength, referer, userAgent);
+
     }
+
+    public enum HttpMethod {
+        GET, POST, PUT, DELETE, PATCH
+    }
+
 }
+
 

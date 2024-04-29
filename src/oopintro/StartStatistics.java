@@ -1,28 +1,26 @@
 package oopintro;
 
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
+
+import static oopintro.ReadFile.readFile;
+import static oopintro.ReadFile.readFromFile;
+
 public class StartStatistics {
-    public static void main(String[] args) {
-        String logLine = "211.71.205.41 2024-04-16T03:10:00 GET /index.html 200 8976 https://example.com Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/96.0.4664.110 Safari/537.36";
-        LogEntry entry = new LogEntry(logLine);
+    public static void main(String[] args) throws FileNotFoundException {
+        File file = new File("c:\\PATH\\access3.log");
+       // List<String> log = readFromFile(file);
 
-        String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/96.0.4664.110 Safari/537.36";
-        UserAgent agent = new UserAgent(userAgent);
-
-        Statistics statistics = new Statistics();
-        statistics.addEntry(entry);
-
-        System.out.println("IP-адрес: " + entry.getIpAddress());
-        System.out.println("Дата и время: " + entry.getDateTime());
-        System.out.println("Метод запроса: " + entry.getMethod());
-        System.out.println("Путь запроса: " + entry.getRequestPath());
-        System.out.println("Код ответа: " + entry.getResponseCode());
-        System.out.println("Размер данных: " + entry.getDataSize());
-        System.out.println("Реферер: " + entry.getReferer());
-        System.out.println("User-Agent: " + entry.getUserAgent());
-
-        System.out.println("Операционная система: " + agent.getOperatingSystem());
-        System.out.println("Браузер: " + agent.getBrowser());
-
-        System.out.println("Общий объём трафика: " + statistics.getTrafficRate());
+        //String logLine = readFile(file);
+       // String file = readFromFile(String.valueOf(logLine)).toString();
+        //System.out.println(logLine);
+       // System.out.println(logLine);
+        String logLine = "209.209.95.6 - - [26/Sep/2022:09:12:09 +0300] \"GET /pandemic/biology/?region=256&minor=no&y=2021&crime=571&motif=no&legality_sentence=576&decision=583&punish=584&punish_a=612&xfield=crime&yfield=y&nr=onviction&show=1 HTTP/1.0\" 200 9182 \"https://www.nova-news.ru//foreign/biology/?region=256&minor=no&y=2021&m=2&crime=571&motif=no&legality_sentence=576&decision=583&punish=584&punish_a=612&xfield=crime&yfield=y&nr=onviction&show=1\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.114 YaBrowser/208.194.152.275 Yowser/2.5 Safari/537.36";
+      //  LogEntry logEntry = new LogEntry(log.toString());
+        System.out.println(logLine);
     }
 }
+

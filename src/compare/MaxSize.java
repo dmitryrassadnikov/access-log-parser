@@ -1,3 +1,5 @@
+package compare;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -5,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+
+public class MaxSize {
     public static void main(String[] args) {
         try {
             int i = 0;
@@ -32,16 +35,26 @@ public class Main {
                 int totalLines = 0;
                 int maxLength = 0;
                 int minLength = Integer.MAX_VALUE;
+                String maxLine = "";
                 List<String> lines = new ArrayList<>();
                 while ((line = reader.readLine()) != null) {
                     totalLines++;
+                    if (line.length() > maxLength) {
+                        maxLength = line.length();
+                        System.out.println("Строка с максимальной длиной: " + maxLength + " " + line);
+                    }
+                    if (line.length() < minLength) {
+                        minLength = line.length();
+                    }
                     lines.add(line);
                 }
                 reader.close();
                 System.out.printf("Общее количество строк в файле: %d\n", totalLines);
+                System.out.printf("Длина самой длинной строки в файле: %d\n", maxLength);
+                System.out.printf("Длина самой короткой строки в файле: %d\n", minLength);
                 for (String s : lines) {
                     if (s.length() > 1024) {
-                        throw new CustException ("Строка слишком длинная!");
+                        throw new CustExcept("Строка слишком длинная!");
                     }
                 }
             }
@@ -51,8 +64,8 @@ public class Main {
     }
 }
 
-class CustException  extends RuntimeException {
-    public CustException (String message) {
+class CustExcept extends RuntimeException {
+    public CustExcept(String message) {
         super(message);
     }
 }
