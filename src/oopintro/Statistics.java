@@ -9,23 +9,23 @@ public class Statistics {
     private LocalDateTime minTime;
     private LocalDateTime maxTime;
 
-    public Statistics() {
 
+    public Statistics() {
+        totalTraffic = 0;
+        minTime = LocalDateTime.MAX;
+        maxTime = LocalDateTime.MIN;
     }
 
     public void addEntry(LogEntry entry) {
-
-        totalTraffic += entry.getDataSize();
-
-        /*if (entry.getDateTime().isBefore(minTime) || minTime == null) {
+        totalTraffic += (int) entry.getContentLength();
+        if (entry.getDateTime().isBefore(minTime)) {
             minTime = entry.getDateTime();
+            System.out.println("Дата минимальная:" + minTime);
         }
-        if (entry.getDateTime().isAfter(maxTime) || maxTime == null) {
+        if (entry.getDateTime().isAfter(maxTime)) {
             maxTime = entry.getDateTime().plusHours(1);
-        }*/
-        minTime = entry.getDateTime();
-        maxTime = entry.getDateTime().plusHours(1);
-
+            System.out.println("Дата максимальная:" + maxTime);
+        }
     }
 
     public double getTrafficRate() {
