@@ -33,8 +33,6 @@ public class LogEntry {
         }
     }
 
-
-
     public String getIpAddress() {
         return ipAddress;
     }
@@ -67,10 +65,13 @@ public class LogEntry {
         return userAgent;
     }
 
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
     @Override
     public String toString() {
-        return String.format("LogEntry{IP-адрес='%s', Дата и время=%s, Метод='%s', Путь='%s', Код ответа=%d, Длина содержимого=%d, Реферер='%s', User-Agent='%s'}",
-                ipAddress, dateTime, method, path, responseCode, contentLength, referer, userAgent);
+        return String.format("LogEntry{IP-адрес='%s', Дата и время=%s, Метод='%s', Путь='%s', Код ответа=%d, Длина содержимого=%d, Реферер='%s', User-Agent='%s'}", ipAddress, dateTime, method, path, responseCode, contentLength, referer, userAgent);
 
     }
 
