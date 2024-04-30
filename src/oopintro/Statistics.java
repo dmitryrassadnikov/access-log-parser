@@ -1,26 +1,23 @@
-package oopintro;
+    package oopintro;
 
-import java.time.LocalDateTime;
+    import java.time.LocalDateTime;
 
 
-public class Statistics {
-    private int totalTraffic;
-    private LocalDateTime minTime;
-    private LocalDateTime maxTime;
-    private String date;
+    public class Statistics {
+        private int totalTraffic;
+        private LocalDateTime minTime;
+        private LocalDateTime maxTime;
+        private String date;
 
-    public Statistics() {
+        public Statistics() {
+        }
+
+        public void addEntry(LogEntry logEntry) {
+                     totalTraffic += (double) logEntry.getContentLength();
+                 }
+
+        public double getTrafficRate() {
+            System.out.println("Общий трафик в байтах: " + totalTraffic);
+            return totalTraffic;
+        }
     }
-
-    public void addEntry(LogEntry logEntry) {
-                 totalTraffic += (double) logEntry.getContentLength();
-             }
-
-    public double getTrafficRate() {
-        System.out.println("Общий трафик в байтах: " + totalTraffic);
-        return totalTraffic;
-    }
-}
-
-
-

@@ -36,6 +36,3 @@ public class StartLogEntry {
         System.out.printf("Средний объем трафика за час: " + "%.1f", statistics.getTrafficRate() / hoursDiff);
     }
 }
-
-
-

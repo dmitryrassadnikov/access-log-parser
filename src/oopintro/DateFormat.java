@@ -24,7 +24,3 @@ public class DateFormat {
         return result;
     }
 }
-
-
-
-
