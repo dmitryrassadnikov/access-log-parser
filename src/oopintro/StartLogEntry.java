@@ -19,13 +19,13 @@ public class StartLogEntry {
         List<LocalDateTime> dates = new ArrayList<>();
         for (String line : lines) {
             logEntry = new LogEntry(line);
-            System.out.println("Строка из лог-файла: " + logEntry);
+          //  System.out.println("Строка из лог-файла: " + logEntry);
             UserAgent userAgent = new UserAgent(logEntry.getUserAgent());
             System.out.print("Операционная система: " + userAgent.getOperatingSystem() + "\n" + "Браузер:" + userAgent.getBrowser() + "\n");
             statistics.addEntry(logEntry);
             dates.add(logEntry.getDateTime());
         }
-       // System.out.println("Даты " + dates);
+        // System.out.println("Даты " + dates);
         LocalDateTime minTime = Collections.min(dates);
         LocalDateTime maxTime = Collections.max(dates);
         Duration duration = Duration.between(minTime, maxTime);
@@ -34,5 +34,7 @@ public class StartLogEntry {
         System.out.printf("Максимальная дата: %s\n", maxTime);
         System.out.println("Период времени в часах = " + hoursDiff);
         System.out.printf("Средний объем трафика за час: " + "%.1f", statistics.getTrafficRate() / hoursDiff);
+        System.out.println("Страницы: " + statistics.getPages());
+        System.out.println("Статистика ОС: " + statistics.getOperatingSystemsStatistics());
     }
 }

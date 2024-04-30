@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 public class UserAgent {
 
-    private final String operatingSystem;
-    private final String browser;
+    private static String operatingSystem;
+    private static String browser;
 
     public UserAgent(String userAgent) {
         Pattern pattern = Pattern.compile("(?i)(?:windows|macos|linux)");
@@ -26,11 +26,11 @@ public class UserAgent {
         }
     }
 
-    public String getOperatingSystem() {
+    public static String getOperatingSystem() {
         return operatingSystem;
     }
 
-    public String getBrowser() {
+    public static String getBrowser() {
         return browser;
     }
 }
