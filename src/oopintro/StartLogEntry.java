@@ -33,10 +33,13 @@ public class StartLogEntry {
         System.out.printf("Минимальная дата: %s\n", minTime);
         System.out.printf("Максимальная дата: %s\n", maxTime);
         System.out.println("Период времени в часах = " + hoursDiff);
-        System.out.printf("Средний объем трафика за час: " + "%.1f\n", statistics.getTrafficRate() / hoursDiff);
+        System.out.printf("Средний объем трафика за час: " + "%.2f\n", statistics.getTrafficRate() / hoursDiff);
         System.out.println("Статистика операционных систем пользователей сайта: " + statistics.getOperatingSystemsStatistics());
         System.out.println("Статистика браузеров пользователей сайта: " + statistics.getBrowserStatistics());
-        System.out.println("Список всех существующих страниц сайта: " + statistics.getPages());
-        System.out.println("Список всех несуществующих страниц сайта: " + statistics.getNonExistingPages());
+        //System.out.println("Список всех существующих страниц сайта: " + statistics.getPages());
+        //System.out.println("Список всех несуществующих страниц сайта: " + statistics.getNonExistingPages());
+        System.out.printf("Среднее количество посещений сайта за час: " + "%.2f\n", statistics.getAverageVisitsPerHour() / (double) hoursDiff);
+        System.out.printf("Среднее количество ошибочных запросов в час: " + "%.2f\n", (double) hoursDiff / statistics.getAverageErrorRatePerHour());
+        System.out.printf("Среднее количество посещений сайта в час одним пользователем: " + "%.2f\n", statistics.getAverageVisitsPerUser());
     }
 }
