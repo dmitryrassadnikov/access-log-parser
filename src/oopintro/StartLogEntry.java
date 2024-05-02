@@ -28,7 +28,6 @@ public class StartLogEntry {
             dates.add(logEntry.getDateTime());
             statistics.addReferer(logEntry.getReferer());
         }
-        // System.out.println("Даты " + dates);
         LocalDateTime minTime = Collections.min(dates);
         LocalDateTime maxTime = Collections.max(dates);
         Duration duration = Duration.between(minTime, maxTime);
