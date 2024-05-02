@@ -1,9 +1,14 @@
-package oopintro;
+package compare;
 
-import java.io.IOException;
+import oopintro.LogEntry;
+import oopintro.UserAgent;
+
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static oopintro.UserAgent.isBot;
 
@@ -21,7 +26,6 @@ public class Statistics {
     private HashMap<String, Integer> errorStats = new HashMap<>();
     private HashMap<String, Integer> uniqueIPs = new HashMap<>();
     private Map<Integer, Integer> peakVisitsPerSecond = new HashMap<>();
-    private Set<String> domains = new HashSet<>();
 
     public Statistics() {
         operatingSystems = new HashMap<>();
@@ -132,22 +136,14 @@ public class Statistics {
         return referringDomains;
     }
 
-    public void addReferer(String referer) throws IOException {
-        String domain = extractDomainFromUrl(referer).toString();
+    public void addReferer(String referer) throws Exception {
+        String domain = extractDomainFromUrl(referer);
         referringDomains.add(domain);
     }
 
-    public Set<String> extractDomainFromUrl(String url) throws IOException {
-        Set<String> domains = new HashSet<>();
-        if (url.contains("-")) {
-            return Collections.singleton(" ");
-        } else if (url.contains("https%3A%2F%2Fwww.rbc.ru&pathname=%2Fpolitics%2F27%2F10%2F2022%2F635a17849a7947739cc38755%3Ffrom%3Dfrom_main_1&project=rbc")) {
-            return Collections.singleton("www.rbc.ru");
-        }
-        URL obj = new URL(url);
-        String host = obj.getHost();
-        domains.add(host);
-        return domains;
+    public String extractDomainFromUrl(String url) throws Exception  {
+        URL inputurl = new URL(url);
+        return inputurl.getHost().substring(4);
     }
 
     public int getMaxVisitsByUser() {
@@ -160,5 +156,4 @@ public class Statistics {
         return maxVisits;
     }
 }
-
 
